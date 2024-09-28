@@ -150,13 +150,13 @@
 <div class="heart" onclick="toggleHeart()">
     <img src="http://images.paramount.tech/path/mgid:file:gsp:entertainment-assets:/sps/shared/characters/kids/kyle-broflovski.png?height=165" alt="Kyle" class="kyle">
     <button class="play-button" onclick="playAudio(event)">
-        <div class="triangle"></div> <!-- Triángulo como icono -->
+        <div class="triangle"></div> 
     </button>
 </div>
 
 <p class="text">Querida miki, tienes un culito muy hermoso, podría dormir noche tras noche sobre él. Déjame decirte que quiero vivir contigo y tener tu culo de sombrero toda la eternidad <3</p>
 
-<audio id="audio" controls>
+<audio id="audio">
     <source src="kyle.mp3" type="audio/mpeg"/>
 </audio>
 
@@ -189,7 +189,10 @@
     function playAudio(event) {
         event.stopPropagation();
         const audio = document.getElementById('audio');
-        audio.play().catch(function(error) {
+        console.log('Intentando reproducir audio...');
+        audio.play().then(() => {
+            console.log('Audio reproducido con éxito.');
+        }).catch(function(error) {
             console.log('Playback failed:', error);
         });
 
