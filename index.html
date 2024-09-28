@@ -8,14 +8,14 @@
     <style>
         body {
             display: flex;
-            flex-direction: column; /* Cambia la dirección del flex a columna */
+            flex-direction: column; 
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: pink; /* Gradiente de fondo */
-            font-family: 'Pacifico', cursive; /* Cambia la fuente */
+            background: pink; 
+            font-family: 'Pacifico', cursive; 
             margin: 0;
-            overflow: hidden; /* Evita que la pantalla se mueva */
+            overflow: hidden; 
         }
 
         .heart {
@@ -27,8 +27,8 @@
             margin: 50px;
             transition: all 0.5s ease;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra inicial */
-            animation: heartbeat 1.5s infinite; /* Latido continuo */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: heartbeat 1.5s infinite;
             display: flex;
             justify-content: center;
             align-items: center; 
@@ -55,9 +55,9 @@
         }
 
         .heart.open {
-            transform: scale(1.5) rotate(-45deg); /* Agranda el corazón */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), /* Sombra más fuerte */
-                        0 0 20px 10px rgba(255, 0, 0, 0.8); /* Brillo */
+            transform: scale(1.5) rotate(-45deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
+                        0 0 20px 10px rgba(255, 0, 0, 0.8); 
         }
 
         @keyframes heartbeat {
@@ -76,28 +76,28 @@
         }
 
         .play-button {
-            width: 70px; /* Ancho del botón */
-            height: 70px; /* Alto del botón */
-            background-color: white; /* Color del botón */
-            border: none; /* Sin borde */
-            border-radius: 50%; /* Botón circular */
-            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+            width: 70px; 
+            height: 70px; 
+            background-color: white; 
+            border: none; 
+            border-radius: 50%; 
+            cursor: pointer; 
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background-color 0.3s; /* Transición de color */
-            position: relative; /* Para centrarlo en el corazón */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+            transition: background-color 0.3s; 
+            position: relative; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
         }
 
         .play-button:hover {
-            background-color: #e0e0e0; /* Color más oscuro al pasar el mouse */
+            background-color: #e0e0e0; 
         }
 
         .triangle {
             width: 0; 
             height: 0; 
-            border-left: 15px solid red; /* Color del triángulo */
+            border-left: 15px solid red; 
             border-top: 10px solid transparent;
             border-bottom: 10px solid transparent;
         }
@@ -107,9 +107,9 @@
             top: 30%;
             left: 50%;
             width: 350px;
-            height: auto; /* Mantiene la relación de aspecto */
+            height: auto; 
             z-index: 2;
-            transform: translate(-40%, -50%) rotate(45deg); /* Centra y ajusta la rotación */
+            transform: translate(-40%, -50%) rotate(45deg); 
         }
 
         @keyframes particles {
@@ -133,15 +133,15 @@
         }
 
         .text {
-            margin-top: 20px; /* Espacio entre el corazón y el texto */
-            font-size: 24px; /* Tamaño del texto */
-            color: #fff; /* Color del texto */
-            text-align: center; /* Centrar el texto */
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Sombra para el texto */
-            max-width: 90%; /* Ancho máximo del texto */
-            padding: 10px; /* Espacio alrededor del texto */
-            border-radius: 10px; /* Bordes redondeados */
-            font-family: 'Poppins', sans-serif
+            margin-top: 20px; 
+            font-size: 24px; 
+            color: #fff; 
+            text-align: center; 
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); 
+            max-width: 90%; 
+            padding: 10px; 
+            border-radius: 10px; 
+            font-family: 'Poppins', sans-serif;
         }
     </style>
 </head>
@@ -154,19 +154,17 @@
     </button>
 </div>
 
-<p class="text">Querida miki, tienes un culito muy hermoso, podría dormir noche tras noche sobre él. Déjame decirte que quiero vivir contigo y tener tu culo de sombrero toda la eternidad <3</p> <!-- Texto agregado debajo del corazón -->
+<p class="text">Querida miki, tienes un culito muy hermoso, podría dormir noche tras noche sobre él. Déjame decirte que quiero vivir contigo y tener tu culo de sombrero toda la eternidad <3</p>
 
 <audio id="audio" controls>
     <source src="kyle.mp3" type="audio/mpeg"/>
-    
-</audio> <!-- Cambia 'ruta/al/audio.mp3' por la ruta de tu audio -->
+</audio>
 
 <script>
     function toggleHeart() {
         const heart = document.querySelector('.heart');
         heart.classList.toggle('open');
 
-        // Añadir partículas
         for (let i = 0; i < 30; i++) {
             createParticle();
         }
@@ -177,39 +175,29 @@
         particle.classList.add('particle');
         document.body.appendChild(particle);
 
-        // Posición aleatoria alrededor del corazón
         const x = Math.random() * window.innerWidth;
         const y = Math.random() * window.innerHeight;
 
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
 
-        // Eliminar partícula después de la animación
         setTimeout(() => {
             particle.remove();
         }, 1000);
     }
 
     function playAudio(event) {
-        event.stopPropagation(); // Evita que se dispare el evento del corazón
+        event.stopPropagation();
         const audio = document.getElementById('audio');
-        audio.play();
+        audio.play().catch(function(error) {
+            console.log('Playback failed:', error);
+        });
 
-        // Añadir partículas al hacer clic en el botón de reproducción
         for (let i = 0; i < 30; i++) {
             createParticle();
         }
     }
 </script>
-    <script>
-    document.getElementById('playAudioButton').addEventListener('click', function() {
-        var audio = document.getElementById('Audio');
-        audio.muted = false;  // Asegúrate de desmutear el audio
-        audio.play().catch(function(error) {
-            console.log('Playback failed:', error);
-        });
-    });
-    </script>
 
 </body>
 </html>
