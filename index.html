@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corazón Abierto con Kyle</title>
+    <link href="" rel="stylesheet"> <!-- Fuente atractiva -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column; /* Cambia la dirección del flex a columna */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: pink; /* Gradiente de fondo */
+            font-family: 'Pacifico', cursive; /* Cambia la fuente */
+            margin: 0;
+            overflow: hidden; /* Evita que la pantalla se mueva */
+        }
+
+        .heart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: #ff0000;
+            transform: rotate(-45deg);
+            margin: 50px;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra inicial */
+            animation: heartbeat 1.5s infinite; /* Latido continuo */
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -100px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 100px;
+            top: 0;
+        }
+
+        .heart.open {
+            transform: scale(1.5) rotate(-45deg); /* Agranda el corazón */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), /* Sombra más fuerte */
+                        0 0 20px 10px rgba(255, 0, 0, 0.8); /* Brillo */
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            25% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(0.9) rotate(-45deg);
+            }
+            75% {
+                transform: scale(1.1) rotate(-45deg);
+            }
+        }
+
+        .play-button {
+            width: 70px; /* Ancho del botón */
+            height: 70px; /* Alto del botón */
+            background-color: white; /* Color del botón */
+            border: none; /* Sin borde */
+            border-radius: 50%; /* Botón circular */
+            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s; /* Transición de color */
+            position: relative; /* Para centrarlo en el corazón */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+        }
+
+        .play-button:hover {
+            background-color: #e0e0e0; /* Color más oscuro al pasar el mouse */
+        }
+
+        .triangle {
+            width: 0; 
+            height: 0; 
+            border-left: 15px solid red; /* Color del triángulo */
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+        .kyle {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            width: 350px;
+            height: auto; /* Mantiene la relación de aspecto */
+            z-index: 2;
+            transform: translate(-40%, -50%) rotate(45deg); /* Centra y ajusta la rotación */
+        }
+
+        @keyframes particles {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
+        }
+
+        .particle {
+            position: absolute;
+            background-color: white;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: particles 1s ease-out forwards;
+        }
+
+        .text {
+            margin-top: 20px; /* Espacio entre el corazón y el texto */
+            font-size: 24px; /* Tamaño del texto */
+            color: #fff; /* Color del texto */
+            text-align: center; /* Centrar el texto */
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Sombra para el texto */
+            max-width: 90%; /* Ancho máximo del texto */
+            padding: 10px; /* Espacio alrededor del texto */
+            border-radius: 10px; /* Bordes redondeados */
+            font-family: 'Poppins', sans-serif
+        }
+    </style>
+</head>
+<body>
+
+<div class="heart" onclick="toggleHeart()">
+    <img src="http://images.paramount.tech/path/mgid:file:gsp:entertainment-assets:/sps/shared/characters/kids/kyle-broflovski.png?height=165" alt="Kyle" class="kyle">
+    <button class="play-button" onclick="playAudio(event)">
+        <div class="triangle"></div> <!-- Triángulo como icono -->
+    </button>
+</div>
+
+<p class="text">Querida miki, tienes un culito muy hermoso, podría dormir noche tras noche sobre él. Déjame decirte que quiero vivir contigo y tener tu culo de sombrero toda la eternidad <3</p> <!-- Texto agregado debajo del corazón -->
+
+<audio id="audio" src="/storage/emulated/0/Download/kyle.mp3"></audio> <!-- Cambia 'ruta/al/audio.mp3' por la ruta de tu audio -->
+
+<script>
+    function toggleHeart() {
+        const heart = document.querySelector('.heart');
+        heart.classList.toggle('open');
+
+        // Añadir partículas
+        for (let i = 0; i < 30; i++) {
+            createParticle();
+        }
+    }
+
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        document.body.appendChild(particle);
+
+        // Posición aleatoria alrededor del corazón
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+
+        // Eliminar partícula después de la animación
+        setTimeout(() => {
+            particle.remove();
+        }, 1000);
+    }
+
+    function playAudio(event) {
+        event.stopPropagation(); // Evita que se dispare el evento del corazón
+        const audio = document.getElementById('audio');
+        audio.play();
+
+        // Añadir partículas al hacer clic en el botón de reproducción
+        for (let i = 0; i < 30; i++) {
+            createParticle();
+        }
+    }
+</script>
+
+</body>
+</html>
